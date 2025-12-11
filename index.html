@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruby Naturals - Productos Naturales</title>
+    <link rel="icon" type="image/png" href="./img/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -11,36 +12,51 @@
 
 <body>
     <style>
-        :root {
-    /* Paleta principal - Beige y Morado Metálico */
-    --primary-color: #8a6e8e;      /* Morado metálico suave */
-    --primary-hover: #6d5b97;      /* Morado metálico más intenso */
-    --secondary-color: #d4b996;    /* Beige cálido */
-    --secondary-hover: #c0a080;    /* Beige más oscuro */
-    --accent: #9b7e8f;             /* Morado rojizo */
-    --accent-hover: #7e5d7a;       /* Morado rojizo oscuro */
-    
-    /* Fondos */
-    --background: #f9f5f0;         /* Beige muy claro */
-    --background-alt: #f0e6d9;     /* Beige ligeramente más oscuro */
-    --card-bg: #ffffff;            /* Fondo blanco para tarjetas */
-    
-    /* Texto */
-    --text-color: #4a3f3f;         /* Gris oscuro cálido */
-    --text-light: #7a6b6b;         /* Gris medio cálido */
-    --text-on-primary: #ffffff;    /* Texto claro sobre fondos oscuros */
-    
-    /* Sombras y bordes */
-    --shadow: 0 4px 20px rgba(138, 110, 142, 0.1);
-    --card-shadow: 0 8px 30px rgba(138, 110, 142, 0.12);
-    --border-color: rgba(138, 110, 142, 0.15);
-    --border-radius: 12px;
+:root {
+    /* 🎨 Colores base originales */
+    --earth:   #E0C1A6;  
+    --petal:   #F1C3B3;  
+    --harvest: #FCAC83;
+
+    /* ⭐ Mezclas equilibradas */
+    --mix-earth-petal:   #EBCBB9;  /* mezcla de beige + rosado */
+    --mix-petal-harvest: #F7B79C;  /* mezcla de rosado + naranja */
+    --mix-earth-harvest: #F0BE95;  /* mezcla cálida beige + naranja */
+
+    /* 🎨 Paleta de diseño principal (ya mezclada) */
+    --primary-color: var(--mix-petal-harvest);   /* rosado-durazno */
+    --primary-hover: #e8ac8f;
+
+    --secondary-color: var(--mix-earth-petal);   /* beige rosado */
+    --secondary-hover: #e3c2b0;
+
+    --accent: var(--harvest);                    /* acento naranja suave */
+    --accent-hover: #e89c74;
+
+    /* 🌈 Fondos suaves (mezclas reducidas con blanco) */
+    --background: #FCECE6;      /* base suave rosado-durazno */
+    --background-alt: #F7DACA;  /* beige rosado claro */
+    --card-bg: #ffffff;
+
+    /* 📝 Texto */
+    --text-color: #4d3a32;  
+    --text-light: #7c6961;   
+    --text-on-primary: #ffffff;
+
+    /* 🌤 Sombras y bordes (tintes de los 3 colores) */
+    --shadow: 0 4px 20px rgba(252, 172, 131, 0.25);     /* HARVEST */
+    --card-shadow: 0 8px 30px rgba(241, 195, 179, 0.25); /* PETAL */
+    --border-color: rgba(224, 193, 166, 0.5);            /* EARTH */
+
+    --border-radius: 14px;
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    
-    /* Degradados */
-    --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--accent));
-    --gradient-secondary: linear-gradient(135deg, var(--secondary-color), #e0c4a0);
+
+    /* 🌈 Degradados mezclados */
+    --gradient-primary: linear-gradient(135deg, var(--petal), var(--harvest));
+    --gradient-secondary: linear-gradient(135deg, var(--earth), var(--petal));
 }
+
+
 
 * {
     margin: 0;
@@ -1352,7 +1368,201 @@ textarea.form-control {
         font-size: 1.3rem;
     }
 }
+/* Estilos para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
 
+.modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 25px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-modal:hover {
+    color: #000;
+}
+
+/* Estilos para el formulario */
+#checkoutForm .form-group {
+    margin-bottom: 15px;
+}
+
+#checkoutForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+#checkoutForm input[type="text"],
+#checkoutForm input[type="tel"],
+#checkoutForm input[type="email"],
+#checkoutForm textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#checkoutForm textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+#checkoutForm button[type="submit"] {
+    background-color: #8a6e8e;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#checkoutForm button[type="submit"]:hover {
+    background-color: #7a5e82;
+}
+/* Ajustes responsivos para el modal */
+@media (max-width: 768px) {
+    .modal {
+        padding: 10px;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 20px auto;
+        padding: 20px 15px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .close-modal {
+        right: 15px;
+        top: 10px;
+        font-size: 24px;
+    }
+
+    #checkoutForm input[type="text"],
+    #checkoutForm input[type="tel"],
+    #checkoutForm input[type="email"],
+    #checkoutForm textarea {
+        font-size: 16px; /* Previene el zoom en iOS */
+    }
+
+    /* Asegurar que el teclado no cubra los campos */
+    @supports (-webkit-overflow-scrolling: touch) {
+        .modal {
+            position: fixed;
+            height: 100%;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .modal-content {
+        width: 100%;
+        margin: 10px;
+        padding: 15px 10px;
+    }
+
+    #checkoutForm button[type="submit"] {
+        padding: 15px 20px;
+        font-size: 18px;
+    }
+}
+.modal {
+    z-index: 1100; /* Mayor que el del carrito */
+}
+
+/* Asegurar que el carrito tenga un z-index menor */
+.cart-sidebar {
+    z-index: 1000;
+}.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1100;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+.close-modal {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 28px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1101;
+}
+.footer-section ul li a {
+    color: white !important;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: var(--primary-color) !important; /* Cambia al color primario al pasar el mouse */
+}
     </style>
     <!-- Header/Navegación -->
     <header class="header">
@@ -1384,8 +1594,8 @@ textarea.form-control {
     <!-- Hero Section -->
     <section id="inicio" class="hero">
         <div class="hero-content">
-            <h1>Bienvenidos a Ruby Naturals</h1>
-            <p>Descubre la magia de lo natural</p>
+            <h1>Belleza Natural para tu Cabello</h1>
+            <p>Productos naturales y orgánicos para el cuidado capilar</p>
             <a href="#productos" class="btn btn-primary">Ver Productos</a>
         </div>
         <div class="hero-overlay"></div>
@@ -1439,28 +1649,28 @@ textarea.form-control {
         <div class="container">
             <h2 style="color: #5d3f6a;">Contáctanos</h2>
             <p class="section-subtitle" style="text-align: center; max-width: 700px; margin: 0 auto 3rem; color: #7a6b6b; line-height: 1.7;">
-                ¿Tienes alguna pregunta o comentario? Estamos aquí para ayudarte. Completa el formulario o contáctanos directamente a través de nuestras redes sociales.
+                ¿Tienes alguna pregunta o comentario? Estamos aquí para ayudarte.
             </p>
             <div class="contact-container">
                 <div class="contact-info">
                     <h3>Información de Contacto</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Ciudad, País</p>
-                    <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Carrera 3 número 21b49 santa Barbara, San juan de pasto, Colombia</p>
+                    <p><i class="fas fa-phone"></i> +57 3116942545</p>
                     <p><i class="fas fa-envelope"></i> info@rubynaturals.com</p>
                     
                     <h3 style="margin-top: 2.5rem; margin-bottom: 1.2rem;">Síguenos</h3>
                     <div class="social-links">
-                        <a href="https://www.instagram.com/tu_cuenta" target="_blank" class="social-icon instagram">
+                        <a href="https://www.instagram.com/rubynaturals2025" target="_blank" class="social-icon instagram">
                             <i class="fab fa-instagram"></i>
-                            <span>Instagram</span>
+
                         </a>
-                        <a href="https://www.tiktok.com/@tu_cuenta" target="_blank" class="social-icon tiktok">
+                        <a href="https://www.tiktok.com/@rubynaturals25?_r=1&_t=ZS-925xHTZAYtw" target="_blank" class="social-icon tiktok">
                             <i class="fab fa-tiktok"></i>
-                            <span>TikTok</span>
+
                         </a>
-                        <a href="https://wa.me/tunumerodewhatsapp" target="_blank" class="social-icon whatsapp">
+                        <a href="https://wa.me/+573116942545" target="_blank" class="social-icon whatsapp">
                             <i class="fab fa-whatsapp"></i>
-                            <span>WhatsApp</span>
+
                         </a>
                     </div>
                     
@@ -1517,7 +1727,7 @@ textarea.form-control {
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Ruby Naturals</h3>
-                    <p>Productos naturales para tu bienestar. Calidad y naturaleza en perfecta armonía.</p>
+                    <p>Productos naturales para el cuidado de tu cabello, elaborados con ingredientes 100% naturales y orgánicos.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Enlaces Rápidos</h3>
@@ -1556,509 +1766,38 @@ textarea.form-control {
             <button class="btn btn-primary" id="checkout">Pagar</button>
         </div>
     </div>
+        <!-- Aquí va el resto de tu HTML... -->
 
-    <script>
-        // DOM Elements
-        const cartIcon = document.querySelector('.cart-icon');
-        const cartSidebar = document.querySelector('.cart-sidebar');
-        const cartOverlay = document.querySelector('.cart-overlay');
-        const closeCartBtn = document.querySelector('.close-cart');
-        const clearCartBtn = document.querySelector('#clear-cart');
-        const checkoutBtn = document.querySelector('#checkout');
-        const cartItemsContainer = document.querySelector('#cart-items');
-        const cartTotal = document.querySelector('#cart-total');
-        const cartCount = document.querySelector('.cart-count');
-        const productsContainer = document.querySelector('#products-container');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        const navLinksItems = document.querySelectorAll('.nav-links a');
-
-        // Cart state
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-        // Products data
-        const products = [
-            {
-                id: 1,
-                name: 'Manzanilla',
-                price: 30000,
-                category: 'belleza',
-                image: './img/manzanilla.png',
-                description: 'Despídete del rubio opaco , consigue un rubio radiante y lleno de vida , el poder ancestral de la manzanilla para cuidar tu color'
-            },
-            {
-                id: 2,
-                name: 'Premium',
-                price: 30000,
-                category: 'suplementos',
-                image: './img/premium.png',
-                description: 'La fórmula ideal para tu cabello enriquecido con extracto natural de hoja de guayaba especialmente para cabellos delicados débiles y tinturados, aporta billo y suavidad extrema.'
-            },
-            {
-                id: 3,
-                name: 'Cebolla',
-                price: 30000,
-                category: 'alimentos',
-                image: './img/cebolla.png',
-                description: 'Recomendado para cabellos no tinturados  , mejora el volumen y el brillo, nutre el folículo piloso y disminuye la caída'
-            },
-            {
-                id: 4,
-                name: 'Café',
-                price: 30000,
-                category: 'belleza',
-                image: './img/cafe.png',
-                description: 'El secreto de un cabello oscuro radiante le tiene la caída promueve el crecimiento nutre y da brillo.'
-            },
-            {
-                id: 5,
-                name: 'Romero',
-                price: 30000,
-                category: 'alimentos',
-                image: './img/romero.png',
-                description: 'Es la solución perfecta para cabellos débiles y con exceso de grasa fortalece la fibra capilar desde la raíz disfruta de una limpieza extrema detiene la caída'
-            },
-            {
-                id: 6,
-                name: 'Acondicionador',
-                price: 25000,
-                category: 'suplementos',
-                image: './img/acondicionador.png',
-                description: 'Con extracto de hoja de guayaba linaza y sábila nutre desenreda tu cabello como nunca antes consigue un cabello sedoso fuerte y radiante'
-            },
-            {
-                id: 7,
-                name: 'Tónico capilar',
-                price: 15000,
-                category: 'suplementos',
-                image: './img/tonico.png',
-                description: 'Tónico capilar con extracto de hoja de guayaba fortalece tu cabello desde la raíz hasta las puntas dile adiós a la caída y bienvenida a la fuerza.'
-            }            
-        ];
-
-        // Initialize the app
-        function init() {
-            // Verificar si el contenedor de productos existe antes de intentar mostrar productos
-            if (productsContainer) {
-                displayProducts(products);
-            }
-            updateCartUI();
-            setupEventListeners();
-        }
-
-        // Display products
-        function displayProducts(productsToShow) {
-            productsContainer.innerHTML = productsToShow.map(product => `
-                <div class="product-card" data-category="${product.category}">
-                    <img src="${product.image}" alt="${product.name}" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">${product.name}</h3>
-                        <p class="product-description">${product.description}</p>
-                        <span class="product-price">$${product.price}</span>
-                        <button class="btn btn-primary add-to-cart" data-id="${product.id}">
-                            Añadir al carrito
-                        </button>
-                    </div>
+    <!-- Modal de Confirmación de Pedido -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Completa tu pedido</h3>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label for="customerName">Nombre completo</label>
+                    <input type="text" id="customerName" required>
                 </div>
-            `).join('');
-
-            // Add event listeners to "Add to Cart" buttons
-           document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', addToCart);
-            });
-        }
-
-        // Filter products
-        function filterProducts(category) {
-            if (category === 'todos') {
-                displayProducts(products);
-            } else {
-                const filteredProducts = products.filter(product => product.category === category);
-                displayProducts(filteredProducts);
-            }
-        }
-
-        // Add to cart
-        function addToCart(e) {
-    // Prevenir comportamiento por defecto y propagación
-    if (e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-    
-    // Obtener el botón más cercano
-    const button = e ? e.target.closest('.add-to-cart') : this;
-    if (!button) return;
-    
-    // Deshabilitar temporalmente el botón
-    button.disabled = true;
-    const originalText = button.innerHTML;
-    button.innerHTML = 'Añadiendo...';
-    
-    // Obtener el ID del producto
-    const productId = parseInt(button.dataset.id);
-    const product = products.find(p => p.id === productId);
-    
-    if (!product) {
-        button.disabled = false;
-        button.innerHTML = originalText;
-        return;
-    }
-    
-    // Usar setTimeout para asegurar que la UI se actualice
-    setTimeout(() => {
-        const existingItem = cart.find(item => item.id === productId);
-        
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({
-                ...product,
-                quantity: 1
-            });
-        }
-        
-        updateCartUI();
-        saveCart();
-        showNotification(`${product.name} añadido al carrito`);
-        
-        // Restaurar el botón
-        button.disabled = false;
-        button.innerHTML = originalText;
-    }, 100);
-}
-
-        // Remove from cart
-        function removeFromCart(productId) {
-            const product = products.find(p => p.id === productId);
-            cart = cart.filter(item => item.id !== productId);
-            updateCartUI();
-            saveCart();
-            
-            // Mostrar notificación de eliminación
-            if (product) {
-                showNotification(`${product.name} eliminado del carrito`);
-            }
-            
-            // Si el carrito queda vacío, cerrar el sidebar después de un breve retraso
-            if (cart.length === 0) {
-                setTimeout(closeCart, 1000);
-            }
-        }
-
-        // Toggle cart
-        function toggleCart() {
-            if (cartSidebar) {
-                cartSidebar.classList.toggle('active');
-                if (cartOverlay) {
-                    cartOverlay.classList.toggle('active');
-                    document.body.style.overflow = cartSidebar.classList.contains('active') ? 'hidden' : '';
-                }
-            }
-        }
-
-        // Close cart
-        function closeCart() {
-            if (cartSidebar) cartSidebar.classList.remove('active');
-            if (cartOverlay) cartOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        // Update cart UI
-        function updateCartUI() {
-            // Verificar si los elementos del DOM existen
-            if (!cartItemsContainer || !cartTotal || !cartCount) return;
-            
-            // Update cart items
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
-                cartTotal.textContent = '$0.00';
-                cartCount.textContent = '0';
-                return;
-            }
-
-            cartItemsContainer.innerHTML = cart.map(item => `
-                <div class="cart-item">
-                    <img src="${item.image}" alt="${item.name}" class="cart-item-img" onerror="this.src='https://via.placeholder.com/80?text=Imagen+no+disponible'">
-                    <div class="cart-item-details">
-                        <h4 class="cart-item-title">${item.name}</h4>
-                        <span class="cart-item-price">$${item.price.toFixed(3)}</span>
-                        <div class="cart-item-quantity">
-                            <button class="quantity-btn decrease-quantity" data-id="${item.id}" aria-label="Reducir cantidad">-</button>
-                            <span class="quantity">${item.quantity}</span>
-                            <button class="quantity-btn increase-quantity" data-id="${item.id}" aria-label="Aumentar cantidad">+</button>
-                        </div>
-                    </div>
-                    <button class="remove-item" data-id="${item.id}" aria-label="Eliminar producto">
-                        <i class="fas fa-times"></i>
-                    </button>
+                <div class="form-group">
+                    <label for="customerPhone">Teléfono</label>
+                    <input type="tel" id="customerPhone" required>
                 </div>
-            `).join('');
+                <div class="form-group">
+                    <label for="customerEmail">Correo electrónico</label>
+                    <input type="email" id="customerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerAddress">Dirección de envío</label>
+                    <textarea id="customerAddress" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirmar Pedido</button>
+            </form>
+        </div>
+    </div>
 
-            // Update total
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            cartTotal.textContent = `$${total.toFixed(2)}`;
-            
-            // Update cart count
-            const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-            if (cartCount) {
-                cartCount.textContent = itemCount;
-                // Mostrar/ocultar el contador del carrito
-                cartCount.style.display = itemCount > 0 ? 'flex' : 'none';
-            }
+    <!-- Aquí van tus scripts de JavaScript -->
+<script src="js.js"></script>
 
-            // Delegación de eventos para los botones del carrito
-            cartItemsContainer.addEventListener('click', (e) => {
-                const target = e.target.closest('[data-id]');
-                if (!target) return;
-                
-                const productId = parseInt(target.dataset.id);
-                
-                if (target.classList.contains('remove-item') || target.closest('.remove-item')) {
-                    e.preventDefault();
-                    removeFromCart(productId);
-                } else if (target.classList.contains('decrease-quantity') || target.closest('.decrease-quantity')) {
-                    e.preventDefault();
-                    updateQuantity(productId, -1);
-                } else if (target.classList.contains('increase-quantity') || target.closest('.increase-quantity')) {
-                    e.preventDefault();
-                    updateQuantity(productId, 1);
-                }
-            });
-        }
-
-        // Update item quantity
-        function updateQuantity(productId, change) {
-            const item = cart.find(item => item.id === productId);
-            if (item) {
-                item.quantity += change;
-                
-                if (item.quantity <= 0) {
-                    // Si la cantidad llega a 0 o menos, eliminar el producto
-                    removeFromCart(productId);
-                } else {
-                    // Actualizar la interfaz y guardar en localStorage
-                    updateCartUI();
-                    saveCart();
-                    
-                    // Mostrar notificación de actualización
-                    const product = products.find(p => p.id === productId);
-                    if (product) {
-                        showNotification(`Cantidad de ${product.name} actualizada a ${item.quantity}`);
-                    }
-                }
-            }
-        }
-
-        // Clear cart
-        function clearCart() {
-            if (cart.length === 0) return;
-            
-            if (confirm('¿Estás seguro de que deseas vaciar el carrito?')) {
-                cart = [];
-                updateCartUI();
-                saveCart();
-                showNotification('Carrito vaciado');
-                
-                // Cerrar el carrito después de vaciarlo
-                setTimeout(closeCart, 800);
-            }
-        }
-
-        // Save cart to localStorage
-        function saveCart() {
-            localStorage.setItem('cart', JSON.stringify(cart));
-        }
-
-        // Show notification
-        function showNotification(message) {
-            // Verificar si ya existe una notificación visible
-            const existingNotification = document.querySelector('.notification.show');
-            if (existingNotification) {
-                // Si ya hay una notificación, actualizarla en lugar de crear una nueva
-                existingNotification.textContent = message;
-                existingNotification.style.animation = 'none';
-                void existingNotification.offsetWidth; // Trigger reflow
-                existingNotification.style.animation = null;
-                return;
-            }
-            
-            const notification = document.createElement('div');
-            notification.className = 'notification';
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            // Forzar un reflow para que la animación funcione correctamente
-            void notification.offsetWidth;
-            
-            notification.classList.add('show');
-            
-            // Eliminar la notificación después de 3 segundos
-            setTimeout(() => {
-                notification.classList.remove('show');
-                // Esperar a que termine la animación antes de eliminar el elemento
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 3000);
-        }
-
-        // Setup event listeners
-        function setupEventListeners() {
-            // Cart toggle
-            if (cartIcon) {
-                cartIcon.addEventListener('click', toggleCart);
-            }
-
-            if (closeCartBtn) {
-                closeCartBtn.addEventListener('click', closeCart);
-            }
-
-            if (cartOverlay) {
-                cartOverlay.addEventListener('click', closeCart);
-            }
-            
-            // Delegación de eventos para los botones de añadir al carrito
-// Dejar solo este manejador
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('add-to-cart') || e.target.closest('.add-to-cart')) {
-        e.preventDefault();  // Añade esta línea para prevenir comportamiento por defecto
-        e.stopPropagation(); // Y esta para detener la propagación
-        addToCart(e);
-    }
-});
-
-            // Clear cart
-            if (clearCartBtn) {
-                clearCartBtn.addEventListener('click', clearCart);
-            }
-
-            // Checkout
-            if (checkoutBtn) {
-                checkoutBtn.addEventListener('click', () => {
-                    if (cart.length === 0) {
-                        showNotification('Tu carrito está vacío');
-                        return;
-                    }
-                    
-                    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                    let message = '¡Hola! Quiero realizar el siguiente pedido:%0A%0A';
-                    
-                    cart.forEach(item => {
-                        message += `- ${item.quantity}x ${item.name} ($${item.price.toFixed(2)} c/u)%0A`;
-                    });
-                    
-                    message += `%0ATotal: $${total.toFixed(2)}`;
-                    
-                    const phoneNumber = '1234567890'; // Reemplaza con tu número de WhatsApp
-                    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-                    
-                    window.open(url, '_blank');
-                });
-            }
-
-            // Filter products
-            if (filterBtns.length > 0) {
-                filterBtns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        // Remove active class from all buttons
-                        filterBtns.forEach(b => b.classList.remove('active'));
-                        // Add active class to clicked button
-                        btn.classList.add('active');
-                        // Filter products
-                        filterProducts(btn.dataset.filter);
-                    });
-                });
-            }
-
-            // Mobile menu toggle
-            if (hamburger && navLinks) {
-                hamburger.addEventListener('click', () => {
-                    hamburger.classList.toggle('active');
-                    navLinks.classList.toggle('active');
-                });
-
-                // Close mobile menu when clicking on a link
-                if (navLinksItems.length > 0) {
-                    navLinksItems.forEach(link => {
-                        link.addEventListener('click', () => {
-                            hamburger.classList.remove('active');
-                            navLinks.classList.remove('active');
-                        });
-                    });
-                }
-            }
-
-            // Sticky header on scroll
-            window.addEventListener('scroll', () => {
-                const header = document.querySelector('.header');
-                if (header) {
-                    header.classList.toggle('scrolled', window.scrollY > 50);
-                }
-            });
-        }
-
-        // Initialize the app when DOM is loaded
-        document.addEventListener('DOMContentLoaded', init);
-
-        // Manejo del formulario de contacto
-        const contactForm = document.getElementById('contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
-                this.reset();
-            });
-        }
-
-        // Manejo del formulario de newsletter
-        const newsletterForm = document.querySelector('.newsletter-form');
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = this.querySelector('input[type="email"]').value;
-                alert(`¡Gracias por suscribirte con el correo ${email}!`);
-                this.reset();
-            });
-        }
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const submitButton = form.querySelector('button[type="submit"]');
-    const statusMessage = document.getElementById('form-status');
     
-    try {
-        submitButton.disabled = true;
-        submitButton.textContent = 'Enviando...';
-        
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-        
-        if (response.ok) {
-            form.reset();
-            statusMessage.style.display = 'block';
-            setTimeout(() => {
-                statusMessage.style.display = 'none';
-            }, 5000);
-        } else {
-            throw new Error('Error al enviar el mensaje');
-        }
-    } catch (error) {
-        alert('Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.');
-        console.error('Error:', error);
-    } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = 'Enviar Mensaje';
-    }
-});
-    </script>
 </body>
 </html>
