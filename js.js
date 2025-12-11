@@ -523,7 +523,7 @@ if (checkoutForm) {
             `📅 Fecha del pedido: ${new Date().toLocaleString('es-CO')}%0A%0A` +
             `¡Gracias por tu compra! Pronto nos pondremos en contacto contigo para confirmar tu pedido.`;
 
-        const phoneNumber = '573217214397';
+        const phoneNumber = '573116942545';
         const url = `https://wa.me/${phoneNumber}?text=${message}`;
         
         window.open(url, '_blank');
@@ -675,7 +675,7 @@ window.addEventListener('click', (e) => {
                     `Este mensaje ha sido enviado desde el sitio web.`;
 
                 window.open(
-                    `https://wa.me/573217214397?text=${encodeURIComponent(message)}`,
+                    `https://wa.me/+573116942545?text=${encodeURIComponent(message)}`,
                     '_blank'
                 );
                 
