@@ -4,1797 +4,1934 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruby Naturals - Productos Naturales</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
     <style>
-        /* Estilos CSS */
-:root {
-    --primary: #A64645;       /* Rojo Terracota */
-    --primary-light: #e8c3c3;  /* Tono más claro del rojo terracota */
-    --secondary: #3C312E;     /* Marrón Café Oscuro */
-    --accent: #663333;        /* Color del Logo/Enlaces */
-    --light: #F5F1E9;         /* Beige/Crema claro - Fondo General */
-    --dark: #333333;          /* Gris Oscuro - Texto Principal */
-    --gray: #6c757d;          /* Gris para texto secundario */
-    --light-gray: #e0d9d0;    /* Gris claro para bordes */
+        :root {
+    /* Paleta principal - Beige y Morado Metálico */
+    --primary-color: #8a6e8e;      /* Morado metálico suave */
+    --primary-hover: #6d5b97;      /* Morado metálico más intenso */
+    --secondary-color: #d4b996;    /* Beige cálido */
+    --secondary-hover: #c0a080;    /* Beige más oscuro */
+    --accent: #9b7e8f;             /* Morado rojizo */
+    --accent-hover: #7e5d7a;       /* Morado rojizo oscuro */
+    
+    /* Fondos */
+    --background: #f9f5f0;         /* Beige muy claro */
+    --background-alt: #f0e6d9;     /* Beige ligeramente más oscuro */
+    --card-bg: #ffffff;            /* Fondo blanco para tarjetas */
+    
+    /* Texto */
+    --text-color: #4a3f3f;         /* Gris oscuro cálido */
+    --text-light: #7a6b6b;         /* Gris medio cálido */
+    --text-on-primary: #ffffff;    /* Texto claro sobre fondos oscuros */
+    
+    /* Sombras y bordes */
+    --shadow: 0 4px 20px rgba(138, 110, 142, 0.1);
+    --card-shadow: 0 8px 30px rgba(138, 110, 142, 0.12);
+    --border-color: rgba(138, 110, 142, 0.15);
+    --border-radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    
+    /* Degradados */
+    --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--accent));
+    --gradient-secondary: linear-gradient(135deg, var(--secondary-color), #e0c4a0);
 }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
-            overflow-x: hidden;
-        }
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-color);
+    line-height: 1.8;
+    background-color: var(--background);
+    background-image: linear-gradient(135deg, var(--background) 0%, var(--background-alt) 100%);
+    min-height: 100vh;
+    background-attachment: fixed;
+}
 
-        /* Estilos de la barra de navegación */
-        .navbar {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-/* Update the logo styles */
-.logo {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2.2rem;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
     font-weight: 700;
-    color: #1A1A1D;  /* Gris Oscuro muy profundo */
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    transition: all 0.3s ease;
-    transform: rotate(-2deg);  /* Ligera inclinación */
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    letter-spacing: -0.5px;
 }
 
-.logo-text {
-    position: relative;
+h1 {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     display: inline-block;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
 }
 
-.logo-text::after {
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 3px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--background);
+    box-shadow: var(--shadow);
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.header.scrolled {
+    padding: 0.5rem 0;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-links a::after {
     content: '';
     position: absolute;
     bottom: -5px;
     left: 0;
-    width: 100%;
+    width: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #1A1A1D, transparent);
-    opacity: 0.3;
+    background-color: var(--primary-color);
+    transition: var(--transition);
 }
 
-.leaf-icon {
-    font-size: 1.2rem;
-    margin-top: -5px;
-    transform: rotate(15deg);
-    display: inline-block;
-    animation: float 3s ease-in-out infinite;
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
 }
 
-@keyframes float {
-    0%, 100% { transform: rotate(15deg) translateY(0); }
-    50% { transform: rotate(15deg) translateY(-5px); }
+.cart-icon {
+    position: relative;
+    margin-left: 2rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--text-color);
 }
 
-.logo:hover {
-    transform: rotate(-1deg) scale(1.02);
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: var(--accent);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: bold;
 }
 
-/* Add this to your media queries for responsive adjustments */
-@media (max-width: 768px) {
-    .logo {
-        font-size: 1.8rem;
-    }
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    margin-left: 1.5rem;
 }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-        }
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+    transition: var(--transition);
+}
 
-        .nav-item {
-            margin-left: 2rem;
-        }
-
-        .nav-link {
-            color: var(--dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        .cart-icon {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-
-        /* Estilos del hero */
-        /* Estilos para la sección hero con imagen de fondo */
+/* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url('img/fondo.png') no-repeat center center/cover;
-    height: 80vh;
+    position: relative;
+    height: 100vh;
+    min-height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+                url('./img/fondo.png') no-repeat center center/cover;
+    background-attachment: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
-    padding: 0 1rem;
-    margin-top: 70px; /* Para compensar el navbar fijo */
+    margin: 0;
+    padding: 0;
+    scroll-margin-top: 70px;
 }
 
-.hero-content h1 {
-    font-size: 3rem;
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 2rem;
+    border-radius: 15px;
+  
+    margin: 0 1rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero h1 {
+    font-size: 3.5rem;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: white;
 }
 
 .hero p {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-bottom: 2rem;
-    max-width: 700px;
+}
+
+/* Products Section */
+.products {
+    padding: 5rem 0;
+    background-color: var(--background-alt);
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.5rem;
+    border: 2px solid var(--primary-color);
+    background: transparent;
+    color: var(--primary-color);
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.product-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(192, 160, 128, 0.2);
+    position: relative;
+    background: linear-gradient(145deg, #ffffff, #faf6f0);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 1.5rem;
+}
+
+.product-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-description {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-price {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: block;
 }
 
 .btn {
     display: inline-block;
-    background-color: var(--primary);
-    color: white;
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
-    text-decoration: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 30px;
     font-weight: 600;
-    transition: all 0.3s ease;
-    border: 2px solid var(--primary);
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    border: none;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.btn:hover {
-    background-color: transparent;
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent));
     color: white;
-    border-color: white;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
-/* Ajustes responsivos para la sección hero */
-@media (max-width: 768px) {
-    .hero {
-        height: 60vh;
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent), var(--primary-hover));
+    opacity: 0;
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.btn-primary:hover::before {
+    opacity: 1;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Cart Sidebar */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.cart-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    background-color: white;
+    z-index: 1001;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.cart-sidebar.active {
+    right: 0;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+.cart-item {
+    display: flex;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 1rem;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.cart-item-price {
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-btn {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity {
+    padding: 0 10px;
+}
+
+.remove-item {
+    color: #ff6b6b;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    align-self: flex-start;
+}
+
+.cart-total {
+    padding: 1.5rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.cart-actions {
+    padding: 0 1.5rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.cart-actions .btn {
+    flex: 1;
+    text-align: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    h1 {
+        font-size: 3rem;
     }
-    
-    .hero-content h1 {
+
+    h2 {
         font-size: 2.2rem;
     }
-    
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 80%;
+        height: calc(100vh - 70px);
+        background-color: white;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 2rem;
+        transition: var(--transition);
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        margin: 1rem 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .hamburger.active span:first-child {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:last-child {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .cart-sidebar {
+        width: 90%;
+        max-width: none;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero {
+        height: 70vh;
+        min-height: 400px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
     .hero p {
         font-size: 1rem;
     }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cart-actions {
+        flex-direction: column;
+    }
+
+    .cart-actions .btn {
+        width: 100%;
+    }
 }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background-color: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            background-color: #d62839;
-        }
-
-        /* Estilos de la sección de productos */
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .underline {
-            height: 3px;
-            width: 80px;
-            background: var(--primary);
-            margin: 0 auto;
-            border-radius: 3px;
-        }
-
-        .products-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.1);
-        }
-
-        .product-info {
-            padding: 1.5rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-info h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-
-        .product-description {
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            flex: 1;
-        }
-
-        .product-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 0.5rem 0;
-        }
-
-        .add-to-cart {
-            width: 100%;
-            padding: 0.8rem;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: auto;
-        }
-
-        .add-to-cart:hover {
-            background-color: #d62839;
-        }
-
-        /* Estilos del carrito */
-        .cart-overlay {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1001;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .cart-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .cart {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 400px;
-            height: 100vh;
-            background: white;
-            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 1002;
-            display: flex;
-            flex-direction: column;
-            transition: right 0.3s ease;
-            overflow-y: auto;
-        }
-
-        .cart.active {
-            right: 0;
-        }
-
-        .cart-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--light-gray);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cart-header h2 {
-            margin: 0;
-            color: var(--dark);
-        }
-
-        .close-cart {
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray);
-            transition: color 0.3s ease;
-        }
-
-        .close-cart:hover {
-            color: var(--primary);
-        }
-
-        .cart-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1.5rem;
-        }
-
-        .cart-item {
-            display: flex;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .cart-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .cart-item-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-right: 1rem;
-            flex-shrink: 0;
-        }
-
-        .cart-item-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .cart-item-details {
-            flex: 1;
-        }
-
-        .cart-item-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-
-        .cart-item-price {
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
-        }
-
-        .quantity-btn {
-            width: 25px;
-            height: 25px;
-            border: 1px solid var(--gray);
-            background: none;
-            border-radius: 4px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-        }
-
-        .quantity {
-            margin: 0 0.5rem;
-            min-width: 20px;
-            text-align: center;
-        }
-
-        .remove-item {
-            color: var(--primary);
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            display: inline-block;
-        }
-
-        .cart-footer {
-            padding: 1.5rem;
-            border-top: 1px solid var(--light-gray);
-            background: white;
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .cart-total h3 {
-            margin: 0;
-            color: var(--dark);
-        }
-
-        .cart-total-amount {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .clear-cart,
-        .checkout-btn {
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 0.5rem;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .clear-cart {
-            background-color: var(--light-gray);
-            color: var(--dark);
-        }
-
-        .clear-cart:hover {
-            background-color: #dee2e6;
-        }
-
-        .checkout-btn {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .checkout-btn:hover {
-            background-color: #d62839;
-        }
-
-        /* Estilos de la sección de categorías */
-        .categories {
-            padding: 5rem 0;
-            background-color: #f9f9f9;
-        }
-
-        .categories-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .category {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .category:hover {
-            transform: translateY(-5px);
-        }
-
-        .category-icon {
-            width: 70px;
-            height: 70px;
-            background-color: var(--primary-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            color: var(--primary);
-            font-size: 1.5rem;
-        }
-
-        .category h3 {
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-
-        .category p {
-            color: var(--gray);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .category-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            transition: color 0.3s ease;
-        }
-
-        .category-link:hover {
-            color: #d62839;
-        }
-
-        .category-link i {
-            margin-left: 0.3rem;
-            font-size: 0.8rem;
-        }
-
-        /* Estilos de la sección sobre nosotros */
-        .about {
-            padding: 5rem 0;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-image {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-image:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            color: var(--gray);
-        }
-
-        /* Estilos de la sección de testimonios */
-        .testimonials {
-            padding: 5rem 0;
-            background-color: #f9f9f9;
-        }
-
-        .testimonials-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .testimonial {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .testimonial-text::before {
-            content: '"';
-            font-size: 4rem;
-            color: var(--primary-light);
-            position: absolute;
-            top: -20px;
-            left: -15px;
-            font-family: serif;
-            line-height: 1;
-            z-index: 1;
-        }
-
-        .testimonial-text p {
-            position: relative;
-            z-index: 2;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-
-        .testimonial-author img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 1rem;
-        }
-
-        .author-info h4 {
-            margin-bottom: 0.3rem;
-            color: var(--dark);
-        }
-
-        .stars {
-            color: #ffc107;
-        }
-
-        /* Estilos de la sección de contacto */
-        .contact {
-            padding: 5rem 0;
-        }
-
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 2rem;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1rem;
-            color: var(--primary);
-            font-size: 1.2rem;
-        }
-
-        .contact-text h3 {
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-
-        .contact-text p {
-            color: var(--gray);
-            margin: 0;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary-light);
-            color: var(--primary);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        .contact-form {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--dark);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        /* Estilos del footer */
-        .footer {
-            background-color: var(--secondary);
-            color: white;
-            padding: 4rem 0 0;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-about h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: white;
-        }
-
-        .footer-about p {
-            color: #b3b3b3;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .footer-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .footer-social a:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .footer-links h3,
-        .footer-newsletter h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            color: white;
-            position: relative;
-            padding-bottom: 0.8rem;
-        }
-
-        .footer-links h3::after,
-        .footer-newsletter h3::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 50px;
-            height: 2px;
-            background-color: var(--primary);
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: #b3b3b3;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            display: inline-block;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-            transform: translateX(5px);
-        }
-
-        .footer-links a::before {
-            content: '→';
-            margin-right: 5px;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links a:hover::before {
-            opacity: 1;
-            margin-right: 10px;
-        }
-
-        .footer-newsletter p {
-            color: #b3b3b3;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .newsletter-form {
-            display: flex;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 0.8rem;
-            border: none;
-            border-radius: 5px 0 0 5px;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        .newsletter-form button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            padding: 0 1.2rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .newsletter-form button:hover {
-            background-color: #d62839;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.5rem 0;
-            text-align: center;
-            color: #b3b3b3;
-            font-size: 0.9rem;
-        }
-
-        /* Botón de WhatsApp */
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: #25d366;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            z-index: 999;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .whatsapp-btn:hover {
-            background-color: #128c7e;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Estilos para móviles */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 21px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .bar {
-            width: 100%;
-            height: 3px;
-            background-color: var(--dark);
-            transition: all 0.3s ease;
-        }
-
-        /* Media Queries */
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .about-image {
-                order: -1;
-            }
-
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                max-width: 300px;
-                height: 100vh;
-                background-color: white;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                padding: 2rem;
-                transition: right 0.3s ease;
-                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-                z-index: 1000;
-            }
-
-            .nav-menu.active {
-                right: 0;
-            }
-
-            .nav-item {
-                margin: 1rem 0;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .products-container,
-            .categories-container,
-            .testimonials-container {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .footer-social {
-                justify-content: center;
-            }
-
-            .newsletter-form {
-                flex-direction: column;
-            }
-
-            .newsletter-form input {
-                border-radius: 5px;
-                margin-bottom: 0.5rem;
-            }
-
-            .newsletter-form button {
-                border-radius: 5px;
-                padding: 0.8rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .section-title h2 {
-                font-size: 2rem;
-            }
-
-            .btn {
-                padding: 0.6rem 1.5rem;
-            }
-
-            .whatsapp-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-                bottom: 20px;
-                right: 20px;
-            }
-        }
+/* Smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Estilos para la sección Sobre Nosotros */
+.section-padding {
+    padding: 6rem 0;
+    position: relative;
+}
+
+.section-padding::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    opacity: 0.7;
+}
+
+.bg-light {
+    background-color: var(--background-alt);
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(192, 160, 128, 0.3);
+}
+
+.about-image {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.about-image img:hover {
+    transform: scale(1.03);
+}
+
+.about-content {
+    flex: 1;
+}
+
+.about-content h3 {
+    color: var(--primary-color);
+    margin: 1.5rem 0 1rem;
+}
+
+.checklist {
+    list-style: none;
+    margin: 1.5rem 0;
+    padding: 0;
+}
+
+.checklist li {
+    margin-bottom: 0.8rem;
+    padding-left: 2rem;
+    position: relative;
+}
+
+.checklist i {
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    top: 0.3rem;
+}
+
+/* Estilos para la sección de Contacto */
+.contact-container {
+    display: flex;
+    gap: 0;
+    margin-top: 2rem;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.contact-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 45px rgba(138, 110, 142, 0.2);
+}
+
+.contact-info, .contact-form {
+    flex: 1;
+    padding: 3.5rem 2.5rem;
+    transition: var(--transition);
+}
+
+.contact-info {
+    background: linear-gradient(145deg, #7a5b8a, #5d3f6a);
+    color: var(--text-on-primary);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cmVjdCB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==');
+    opacity: 0.15;
+}
+
+.contact-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.contact-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--secondary-color);
+    border-radius: 3px;
+}
+
+.contact-info p {
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+    line-height: 1.7;
+    position: relative;
+}
+
+.contact-info i {
+    color: var(--secondary-color);
+    margin-right: 1rem;
+    width: 20px;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.contact-form {
+    background: var(--card-bg);
+    position: relative;
+    padding: 3.5rem 3rem;
+}
+
+.contact-form h3 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.contact-form h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--secondary-color);
+    border-radius: 3px;
+}
+
+.form-group {
+    margin-bottom: 1.8rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid #e0d6e9;
+    border-radius: 8px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: #faf8fc;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(138, 110, 142, 0.2);
+    outline: none;
+    background-color: white;
+}
+
+textarea.form-control {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent));
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 4px 15px rgba(138, 110, 142, 0.3);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(138, 110, 142, 0.4);
+}
+
+.btn-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent), var(--primary-hover));
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: -1;
+}
+
+.btn-submit:hover::before {
+    opacity: 1;
+}
+
+/* Efecto de foco en los campos del formulario */
+.form-group.focused label {
+    color: var(--primary-color);
+}
+
+/* Estilos para el placeholder */
+::placeholder {
+    color: #b8b5c0;
+    opacity: 1;
+}
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    margin: 8px 5px;
+    border-radius: 30px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.social-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.1);
+    z-index: -1;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.social-icon:hover::before {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.social-icon i {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.social-icon span {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.social-icon.instagram {
+    background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+}
+
+.social-icon.tiktok {
+    background: #000000;
+}
+
+.social-icon.whatsapp {
+    background: #25D366;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.about-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.about-section:hover {
+    transform: translateY(-5px);
+}
+
+/* Estilos para el Mapa */
+.map-container {
+    width: 100%;
+    height: 400px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para el Footer */
+.footer {
+    background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
+    color: var(--text-on-primary);
+    padding: 5rem 0 0;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 4rem;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+.footer-section p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-section a:hover {
+    color: var(--primary-color);
+    padding-left: 5px;
+}
+
+.newsletter-form {
+    display: flex;
+    margin-top: 1.5rem;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    font-family: inherit;
+}
+
+.newsletter-form .btn {
+    border-radius: 0 5px 5px 0;
+    padding: 0 1.5rem;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-links a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Estilos responsivos */
+@media (max-width: 992px) {
+    .about-container,
+    .contact-container {
+        flex-direction: column;
+    }
+
+    .about-image,
+    .about-content,
+    .contact-info,
+    .contact-form {
+        width: 100%;
+    }
+
+    .contact-info {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .newsletter-form {
+        flex-direction: column;
+    }
+
+    .newsletter-form input,
+    .newsletter-form .btn {
+        width: 100%;
+        border-radius: 5px;
+    }
+
+    .newsletter-form .btn {
+        margin-top: 0.5rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links {
+        margin-top: 1rem;
+        justify-content: center;
+    }
+}
+
+/* Estilos para notificaciones */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.notification.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* Estilos para el carrito vacío */
+.empty-cart {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-light);
+    font-style: italic;
+}
+
     </style>
-</head>
-<body>
-    <!-- Barra de Navegación -->
-    <nav class="navbar">
+    <!-- Header/Navegación -->
+    <header class="header">
         <div class="container">
-            <a href="#" class="logo">Ruby Naturals</a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <div class="logo">
+                <h1>Ruby Naturals</h1>
             </div>
-            <ul class="nav-menu" id="nav-menu">
-                <li class="nav-item"><a href="#inicio" class="nav-link active">Inicio</a></li>
-                <li class="nav-item"><a href="#productos" class="nav-link">Productos</a></li>
-                <li class="nav-item"><a href="#nosotros" class="nav-link">Nosotros</a></li>
-                <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
-                <li class="nav-item">
-                    <div class="cart-icon" id="cart-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count" id="cart-count">0</span>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
 
-    <!-- Carrito de Compras -->
-    <div class="cart-overlay" id="cart-overlay">
-        <div class="cart" id="cart">
-            <span class="close-cart" id="close-cart"><i class="fas fa-times"></i></span>
-            <h2>Tu Carrito</h2>
-            <div class="cart-content" id="cart-content">
-                <!-- Los productos del carrito se agregarán aquí dinámicamente -->
-            </div>
-            <div class="cart-footer">
-                <div class="cart-total">
-                    <h3>Total:</h3>
-                    <span class="cart-total-amount" id="cart-total">$0</span>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
                 </div>
-                <button class="clear-cart banner-btn" id="clear-cart">Vaciar Carrito</button>
-                <button class="checkout-btn" id="checkout-btn">Finalizar Compra</button>
-            </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
         </div>
-    </div>
+    </header>
 
-    <!-- Sección Hero -->
-    <section class="hero" id="inicio">
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
         <div class="hero-content">
             <h1>Bienvenidos a Ruby Naturals</h1>
-            <p>Descubre los mejores productos naturales para tu bienestar</p>
-            <a href="#productos" class="btn">Ver Productos</a>
+            <p>Descubre la magia de lo natural</p>
+            <a href="#productos" class="btn btn-primary">Ver Productos</a>
         </div>
+        <div class="hero-overlay"></div>
     </section>
 
     <!-- Sección de Productos -->
-    <section class="featured" id="productos">
+    <section id="productos" class="products">
         <div class="container">
-            <div class="section-title">
-                <h2>Nuestros Productos</h2>
-                <div class="underline"></div>
-            </div>
-            <div class="products-container" id="products-container">
-                <!-- Los productos se cargarán dinámicamente aquí -->
-            </div>
-        </div>
-    </section>
+            <h2>Nuestros Productos</h2>
 
-    <!-- Sección de Categorías -->
-    <section class="categories">
-        <div class="container">
-            <div class="section-title">
-                <h2>Categorías</h2>
-                <div class="underline"></div>
-            </div>
-            <div class="categories-container">
-                <div class="category">
-                    <div class="category-icon">
-                        <i class="fas fa-spa"></i>
-                    </div>
-                    <h3>Aceites Esenciales</h3>
-                    <p>100% puros y naturales</p>
-                    <a href="#" class="category-link">Ver más <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="category">
-                    <div class="category-icon">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3>Suplementos</h3>
-                    <p>Para tu salud y bienestar</p>
-                    <a href="#" class="category-link">Ver más <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="category">
-                    <div class="category-icon">
-                        <i class="fas fa-pump-soap"></i>
-                    </div>
-                    <h3>Cuidado Personal</h3>
-                    <p>Natural y libre de químicos</p>
-                    <a href="#" class="category-link">Ver más <i class="fas fa-arrow-right"></i></a>
-                </div>
+            <div class="products-grid" id="products-container">
+                <!-- Los productos se cargarán dinámicamente con JavaScript -->
             </div>
         </div>
     </section>
 
     <!-- Sección Sobre Nosotros -->
-    <section class="about" id="nosotros">
+    <section id="sobre-nosotros" class="section-padding">
         <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <div class="section-title">
-                        <h2>Sobre Nosotros</h2>
-                        <div class="underline"></div>
-                    </div>
-                    <p>En Ruby Naturals nos dedicamos a ofrecer productos naturales de la más alta calidad, cuidadosamente seleccionados para promover un estilo de vida saludable y sostenible.</p>
-                    <p>Nuestro compromiso es con tu bienestar y el cuidado del medio ambiente, por eso todos nuestros productos son libres de químicos dañinos y están elaborados con ingredientes naturales.</p>
-                    <a href="#" class="btn">Conoce más</a>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1504674900247-087703934569?ixlib=rb-4.0.3" alt="Sobre Ruby Naturals">
+            <h2>Sobre Nosotros</h2>
+            <div class="about-container">
+
+<div class="about-section">
+    <h3>Misión</h3>
+    <p>Crear productos capilares 100% naturales que fortalezcan y cuiden el cabello sin químicos dañinos.</p>
+</div>
+
+<div class="about-section">
+    <h3>Visión</h3>
+    <p>Ser la marca líder en cuidado capilar natural, reconocida por su calidad y resultados reales.</p>
+</div>
+
+<div class="about-section">
+    <h3>Filosofía</h3>
+    <p>Creemos en el poder de la naturaleza para transformar el cabello con ingredientes puros y responsables.</p>
+</div>
                 </div>
             </div>
         </div>
     </section>
 
-
-    <!-- Sección de Contacto -->
-    <section class="contact" id="contacto">
+    <!-- Sección Contáctanos -->
+    <section id="contacto" class="section-padding" style="background-color: #faf7f2;">
         <div class="container">
-            <div class="section-title">
-                <h2>Contáctanos</h2>
-                <div class="underline"></div>
-            </div>
+            <h2 style="color: #5d3f6a;">Contáctanos</h2>
+            <p class="section-subtitle" style="text-align: center; max-width: 700px; margin: 0 auto 3rem; color: #7a6b6b; line-height: 1.7;">
+                ¿Tienes alguna pregunta o comentario? Estamos aquí para ayudarte. Completa el formulario o contáctanos directamente a través de nuestras redes sociales.
+            </p>
             <div class="contact-container">
                 <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h3>Dirección</h3>
-                            <p>123 Calle Natural, Ciudad, País</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h3>Teléfono</h3>
-                            <p>+1 234 567 890</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h3>Email</h3>
-                            <p>contacto@rubynaturals.com</p>
-                        </div>
-                    </div>
+                    <h3>Información de Contacto</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Ciudad, País</p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                    <p><i class="fas fa-envelope"></i> info@rubynaturals.com</p>
+                    
+                    <h3 style="margin-top: 2.5rem; margin-bottom: 1.2rem;">Síguenos</h3>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="https://www.instagram.com/tu_cuenta" target="_blank" class="social-icon instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://www.tiktok.com/@tu_cuenta" target="_blank" class="social-icon tiktok">
+                            <i class="fab fa-tiktok"></i>
+                            <span>TikTok</span>
+                        </a>
+                        <a href="https://wa.me/tunumerodewhatsapp" target="_blank" class="social-icon whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
                     </div>
+                    
+
                 </div>
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <input type="text" id="name" placeholder="Nombre completo" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" placeholder="Correo electrónico" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="subject" placeholder="Asunto">
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" rows="5" placeholder="Tu mensaje" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Enviar Mensaje</button>
-                </form>
+                
+                <div class="contact-form">
+                    <h3>Envíanos un Mensaje</h3>
+<form id="contactForm" action="https://formspree.io/f/xblnzwbv" method="POST">
+    <div class="form-group">
+        <label for="name">Nombre Completo</label>
+        <input type="text" id="name" name="name" class="form-control" placeholder="Tu nombre completo" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Correo Electrónico</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="tu@email.com" required>
+    </div>
+    <div class="form-group">
+        <label for="subject">Asunto</label>
+        <input type="text" id="subject" name="subject" class="form-control" placeholder="¿En qué podemos ayudarte?" required>
+    </div>
+    <div class="form-group">
+        <label for="message">Mensaje</label>
+        <textarea id="message" name="message" class="form-control" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+    <div id="form-status" style="display: none; margin-top: 1rem; padding: 1rem; background: #e8f5e9; border-radius: 5px; color: #2e7d32;">
+        ¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.
+    </div>
+</form>
+                </div>
+            </div>
+            
+            <div class="map-container" style="margin-top: 4rem; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d249.3087040565059!2d-77.26328659995335!3d1.2027550166340513!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e2ed5d9c7542081%3A0x89eb5e7a63abc528!2sruby%20natural&#39;s!5e0!3m2!1ses!2sco!4v1765406803405!5m2!1ses!2sco"
+                    width="100%" 
+                    height="400" 
+                    style="border:0; display:block;" 
+                    allowfullscreen 
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
         </div>
     </section>
+
+    <!-- Mapa -->
+
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-about">
+                <div class="footer-section">
                     <h3>Ruby Naturals</h3>
-                    <p>Productos naturales para una vida saludable y sostenible. Ofrecemos lo mejor de la naturaleza para tu bienestar.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
-                    </div>
+                    <p>Productos naturales para tu bienestar. Calidad y naturaleza en perfecta armonía.</p>
                 </div>
-                <div class="footer-links">
+                <div class="footer-section">
                     <h3>Enlaces Rápidos</h3>
                     <ul>
                         <li><a href="#inicio">Inicio</a></li>
                         <li><a href="#productos">Productos</a></li>
-                        <li><a href="#nosotros">Sobre Nosotros</a></li>
+                        <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
                         <li><a href="#contacto">Contacto</a></li>
-                        <li><a href="#">Términos y Condiciones</a></li>
-                        <li><a href="#">Política de Privacidad</a></li>
                     </ul>
                 </div>
-                <div class="footer-newsletter">
-                    <h3>Boletín Informativo</h3>
-                    <p>Suscríbete para recibir ofertas exclusivas y novedades sobre nuestros productos naturales.</p>
-                    <form class="newsletter-form" id="newsletterForm">
-                        <input type="email" placeholder="Tu correo electrónico" required>
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                    </form>
-                </div>
+
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 Ruby Naturals. Todos los derechos reservados.</p>
+                <p>&copy; 2025 Ruby Naturals. Todos los derechos reservados.</p>
+
             </div>
         </div>
     </footer>
 
-    <!-- Botón de WhatsApp -->
-    <a href="https://wa.me/573217214397" class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Los elementos del carrito se cargarán aquí dinámicamente -->
+        </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cart-total">$0.00</span>
+        </div>
+        <div class="cart-actions">
+            <button class="btn btn-outline" id="clear-cart">Vaciar Carrito</button>
+            <button class="btn btn-primary" id="checkout">Pagar</button>
+        </div>
+    </div>
 
-    <!-- Scripts -->
     <script>
-        // Datos de productos (simulados, en un caso real vendrían de una API o base de datos)
-const products = [
-    {
-        id: 1,
-        name: "Acondicionador Natural",
-        description: "Acondicionador 100% natural para un cabello suave y brillante.",
-        price: 25000,
-        image: "img/acondicionador.png",
-        category: "Cuidado Personal",
-        stock: 10
-    },
-    {
-        id: 2,
-        name: "Café Orgánico",
-        description: "Café 100% orgánico de origen colombiano, tostado artesanalmente.",
-        price: 18000,
-        image: "img/cafe.png",
-        category: "Alimentos",
-        stock: 15
-    },
-    {
-        id: 3,
-        name: "Shampoo de Cebolla",
-        description: "Fortalece el cabello y estimula su crecimiento de forma natural.",
-        price: 22000,
-        image: "img/cebolla.png",
-        category: "Cuidado Personal",
-        stock: 8
-    },
-    {
-        id: 4,
-        name: "Té de Manzanilla",
-        description: "Infusión relajante de manzanilla 100% natural.",
-        price: 12000,
-        image: "img/manzanilla.png",
-        category: "Infusiones",
-        stock: 12
-    },
-    {
-        id: 5,
-        name: "Aceite de Romero",
-        description: "Aceite esencial puro de romero para múltiples usos.",
-        price: 28000,
-        image: "img/romero.png",
-        category: "Aceites Esenciales",
-        stock: 7
-    },
-    {
-        id: 6,
-        name: "Tónico Facial",
-        description: "Tónico refrescante para todo tipo de piel.",
-        price: 30000,
-        image: "img/tonico.png",
-        category: "Cuidado Facial",
-        stock: 20
-    },
-    {
-        id: 7,
-        name: "Kit Premium",
-        description: "Paquete completo con nuestros mejores productos.",
-        price: 85000,
-        image: "img/premium.png",
-        category: "Kits",
-        stock: 5
-    }
-];
+        // DOM Elements
+        const cartIcon = document.querySelector('.cart-icon');
+        const cartSidebar = document.querySelector('.cart-sidebar');
+        const cartOverlay = document.querySelector('.cart-overlay');
+        const closeCartBtn = document.querySelector('.close-cart');
+        const clearCartBtn = document.querySelector('#clear-cart');
+        const checkoutBtn = document.querySelector('#checkout');
+        const cartItemsContainer = document.querySelector('#cart-items');
+        const cartTotal = document.querySelector('#cart-total');
+        const cartCount = document.querySelector('.cart-count');
+        const productsContainer = document.querySelector('#products-container');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navLinksItems = document.querySelectorAll('.nav-links a');
 
-        // Variables del carrito
+        // Cart state
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const cartCount = document.getElementById('cart-count');
-        const cartContent = document.getElementById('cart-content');
-        const cartTotal = document.getElementById('cart-total');
-        const cartOverlay = document.getElementById('cart-overlay');
-        const cartIcon = document.getElementById('cart-icon');
-        const closeCart = document.getElementById('close-cart');
-        const clearCartBtn = document.getElementById('clear-cart');
-        const checkoutBtn = document.getElementById('checkout-btn');
-        const productsContainer = document.getElementById('products-container');
-        const mobileMenuBtn = document.getElementById('mobile-menu');
-        const navMenu = document.getElementById('nav-menu');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const contactForm = document.getElementById('contactForm');
-        const newsletterForm = document.getElementById('newsletterForm');
 
-        // Inicializar la aplicación
-        document.addEventListener('DOMContentLoaded', () => {
-            displayProducts();
-            updateCart();
+        // Products data
+        const products = [
+            {
+                id: 1,
+                name: 'Manzanilla',
+                price: 30000,
+                category: 'belleza',
+                image: './img/manzanilla.png',
+                description: 'Despídete del rubio opaco , consigue un rubio radiante y lleno de vida , el poder ancestral de la manzanilla para cuidar tu color'
+            },
+            {
+                id: 2,
+                name: 'Premium',
+                price: 30000,
+                category: 'suplementos',
+                image: './img/premium.png',
+                description: 'La fórmula ideal para tu cabello enriquecido con extracto natural de hoja de guayaba especialmente para cabellos delicados débiles y tinturados, aporta billo y suavidad extrema.'
+            },
+            {
+                id: 3,
+                name: 'Cebolla',
+                price: 30000,
+                category: 'alimentos',
+                image: './img/cebolla.png',
+                description: 'Recomendado para cabellos no tinturados  , mejora el volumen y el brillo, nutre el folículo piloso y disminuye la caída'
+            },
+            {
+                id: 4,
+                name: 'Café',
+                price: 30000,
+                category: 'belleza',
+                image: './img/cafe.png',
+                description: 'El secreto de un cabello oscuro radiante le tiene la caída promueve el crecimiento nutre y da brillo.'
+            },
+            {
+                id: 5,
+                name: 'Romero',
+                price: 30000,
+                category: 'alimentos',
+                image: './img/romero.png',
+                description: 'Es la solución perfecta para cabellos débiles y con exceso de grasa fortalece la fibra capilar desde la raíz disfruta de una limpieza extrema detiene la caída'
+            },
+            {
+                id: 6,
+                name: 'Acondicionador',
+                price: 25000,
+                category: 'suplementos',
+                image: './img/acondicionador.png',
+                description: 'Con extracto de hoja de guayaba linaza y sábila nutre desenreda tu cabello como nunca antes consigue un cabello sedoso fuerte y radiante'
+            },
+            {
+                id: 7,
+                name: 'Tónico capilar',
+                price: 15000,
+                category: 'suplementos',
+                image: './img/tonico.png',
+                description: 'Tónico capilar con extracto de hoja de guayaba fortalece tu cabello desde la raíz hasta las puntas dile adiós a la caída y bienvenida a la fuerza.'
+            }            
+        ];
+
+        // Initialize the app
+        function init() {
+            // Verificar si el contenedor de productos existe antes de intentar mostrar productos
+            if (productsContainer) {
+                displayProducts(products);
+            }
+            updateCartUI();
             setupEventListeners();
-        });
+        }
 
-        // Mostrar productos en la página
-        function displayProducts() {
-            if (!productsContainer) return;
-
-            productsContainer.innerHTML = products.map(product => `
-                <div class="product-card" data-id="${product.id}">
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}">
-                    </div>
+        // Display products
+        function displayProducts(productsToShow) {
+            productsContainer.innerHTML = productsToShow.map(product => `
+                <div class="product-card" data-category="${product.category}">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
                     <div class="product-info">
-                        <h3>${product.name}</h3>
+                        <h3 class="product-title">${product.name}</h3>
                         <p class="product-description">${product.description}</p>
-                        <div class="product-price">$${product.price.toFixed(2)}</div>
-                        <button class="add-to-cart" data-id="${product.id}">
+                        <span class="product-price">$${product.price}</span>
+                        <button class="btn btn-primary add-to-cart" data-id="${product.id}">
                             Añadir al carrito
                         </button>
                     </div>
                 </div>
             `).join('');
 
-            // Agregar event listeners a los botones de añadir al carrito
-            document.querySelectorAll('.add-to-cart').forEach(button => {
-                button.addEventListener('click', addToCart);
+            // Add event listeners to "Add to Cart" buttons
+           document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', addToCart);
             });
         }
 
-        // Añadir producto al carrito
-        function addToCart(e) {
-            const productId = parseInt(e.target.dataset.id);
-            const product = products.find(p => p.id === productId);
-            
-            if (!product) return;
-
-            // Verificar si el producto ya está en el carrito
-            const existingItem = cart.find(item => item.id === productId);
-            
-            if (existingItem) {
-                // Si ya está en el carrito, aumentar la cantidad
-                existingItem.quantity += 1;
+        // Filter products
+        function filterProducts(category) {
+            if (category === 'todos') {
+                displayProducts(products);
             } else {
-                // Si no está en el carrito, agregarlo
-                cart.push({
-                    ...product,
-                    quantity: 1
-                });
+                const filteredProducts = products.filter(product => product.category === category);
+                displayProducts(filteredProducts);
             }
-
-            // Actualizar el carrito
-            updateCart();
-            showNotification('Producto añadido al carrito');
         }
 
-        // Actualizar el carrito
-        function updateCart() {
-            // Guardar en localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
-            
-            // Actualizar contador del carrito
-            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-            if (cartCount) cartCount.textContent = totalItems;
-            
-            // Actualizar lista de productos en el carrito
-            if (cartContent) {
-                if (cart.length === 0) {
-                    cartContent.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
-                    if (cartTotal) cartTotal.textContent = '$0';
-                    return;
-                }
+        // Add to cart
+        function addToCart(e) {
+    // Prevenir comportamiento por defecto y propagación
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    // Obtener el botón más cercano
+    const button = e ? e.target.closest('.add-to-cart') : this;
+    if (!button) return;
+    
+    // Deshabilitar temporalmente el botón
+    button.disabled = true;
+    const originalText = button.innerHTML;
+    button.innerHTML = 'Añadiendo...';
+    
+    // Obtener el ID del producto
+    const productId = parseInt(button.dataset.id);
+    const product = products.find(p => p.id === productId);
+    
+    if (!product) {
+        button.disabled = false;
+        button.innerHTML = originalText;
+        return;
+    }
+    
+    // Usar setTimeout para asegurar que la UI se actualice
+    setTimeout(() => {
+        const existingItem = cart.find(item => item.id === productId);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({
+                ...product,
+                quantity: 1
+            });
+        }
+        
+        updateCartUI();
+        saveCart();
+        showNotification(`${product.name} añadido al carrito`);
+        
+        // Restaurar el botón
+        button.disabled = false;
+        button.innerHTML = originalText;
+    }, 100);
+}
 
-                cartContent.innerHTML = cart.map(item => `
-                    <div class="cart-item" data-id="${item.id}">
-                        <div class="cart-item-img">
-                            <img src="${item.image}" alt="${item.name}">
-                        </div>
-                        <div class="cart-item-details">
-                            <h4 class="cart-item-title">${item.name}</h4>
-                            <span class="cart-item-price">$${item.price.toFixed(2)}</span>
-                            <div class="cart-item-quantity">
-                                <button class="quantity-btn decrease" data-id="${item.id}">-</button>
-                                <span class="quantity">${item.quantity}</span>
-                                <button class="quantity-btn increase" data-id="${item.id}">+</button>
-                            </div>
-                            <button class="remove-item" data-id="${item.id}">Eliminar</button>
+        // Remove from cart
+        function removeFromCart(productId) {
+            const product = products.find(p => p.id === productId);
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+            saveCart();
+            
+            // Mostrar notificación de eliminación
+            if (product) {
+                showNotification(`${product.name} eliminado del carrito`);
+            }
+            
+            // Si el carrito queda vacío, cerrar el sidebar después de un breve retraso
+            if (cart.length === 0) {
+                setTimeout(closeCart, 1000);
+            }
+        }
+
+        // Toggle cart
+        function toggleCart() {
+            if (cartSidebar) {
+                cartSidebar.classList.toggle('active');
+                if (cartOverlay) {
+                    cartOverlay.classList.toggle('active');
+                    document.body.style.overflow = cartSidebar.classList.contains('active') ? 'hidden' : '';
+                }
+            }
+        }
+
+        // Close cart
+        function closeCart() {
+            if (cartSidebar) cartSidebar.classList.remove('active');
+            if (cartOverlay) cartOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Update cart UI
+        function updateCartUI() {
+            // Verificar si los elementos del DOM existen
+            if (!cartItemsContainer || !cartTotal || !cartCount) return;
+            
+            // Update cart items
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
+                cartTotal.textContent = '$0.00';
+                cartCount.textContent = '0';
+                return;
+            }
+
+            cartItemsContainer.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-img" onerror="this.src='https://via.placeholder.com/80?text=Imagen+no+disponible'">
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-title">${item.name}</h4>
+                        <span class="cart-item-price">$${item.price.toFixed(3)}</span>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn decrease-quantity" data-id="${item.id}" aria-label="Reducir cantidad">-</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="quantity-btn increase-quantity" data-id="${item.id}" aria-label="Aumentar cantidad">+</button>
                         </div>
                     </div>
-                `).join('');
+                    <button class="remove-item" data-id="${item.id}" aria-label="Eliminar producto">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `).join('');
 
-                // Calcular el total
-                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
-
-                // Agregar event listeners a los botones de cantidad
-                document.querySelectorAll('.quantity-btn').forEach(button => {
-                    button.addEventListener('click', updateQuantity);
-                });
-
-                // Agregar event listeners a los botones de eliminar
-                document.querySelectorAll('.remove-item').forEach(button => {
-                    button.addEventListener('click', removeFromCart);
-                });
+            // Update total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+            
+            // Update cart count
+            const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            if (cartCount) {
+                cartCount.textContent = itemCount;
+                // Mostrar/ocultar el contador del carrito
+                cartCount.style.display = itemCount > 0 ? 'flex' : 'none';
             }
+
+            // Delegación de eventos para los botones del carrito
+            cartItemsContainer.addEventListener('click', (e) => {
+                const target = e.target.closest('[data-id]');
+                if (!target) return;
+                
+                const productId = parseInt(target.dataset.id);
+                
+                if (target.classList.contains('remove-item') || target.closest('.remove-item')) {
+                    e.preventDefault();
+                    removeFromCart(productId);
+                } else if (target.classList.contains('decrease-quantity') || target.closest('.decrease-quantity')) {
+                    e.preventDefault();
+                    updateQuantity(productId, -1);
+                } else if (target.classList.contains('increase-quantity') || target.closest('.increase-quantity')) {
+                    e.preventDefault();
+                    updateQuantity(productId, 1);
+                }
+            });
         }
 
-        // Actualizar cantidad de un producto en el carrito
-        function updateQuantity(e) {
-            const productId = parseInt(e.target.dataset.id);
+        // Update item quantity
+        function updateQuantity(productId, change) {
             const item = cart.find(item => item.id === productId);
-            
-            if (!item) return;
-
-            if (e.target.classList.contains('increase')) {
-                item.quantity += 1;
-            } else if (e.target.classList.contains('decrease')) {
-                if (item.quantity > 1) {
-                    item.quantity -= 1;
+            if (item) {
+                item.quantity += change;
+                
+                if (item.quantity <= 0) {
+                    // Si la cantidad llega a 0 o menos, eliminar el producto
+                    removeFromCart(productId);
                 } else {
-                    // Si la cantidad es 1 y se hace clic en disminuir, eliminar el producto
-                    cart = cart.filter(i => i.id !== productId);
+                    // Actualizar la interfaz y guardar en localStorage
+                    updateCartUI();
+                    saveCart();
+                    
+                    // Mostrar notificación de actualización
+                    const product = products.find(p => p.id === productId);
+                    if (product) {
+                        showNotification(`Cantidad de ${product.name} actualizada a ${item.quantity}`);
+                    }
                 }
             }
-
-            updateCart();
         }
 
-        // Eliminar producto del carrito
-        function removeFromCart(e) {
-            const productId = parseInt(e.target.dataset.id);
-            cart = cart.filter(item => item.id !== productId);
-            updateCart();
-            showNotification('Producto eliminado del carrito');
+        // Clear cart
+        function clearCart() {
+            if (cart.length === 0) return;
+            
+            if (confirm('¿Estás seguro de que deseas vaciar el carrito?')) {
+                cart = [];
+                updateCartUI();
+                saveCart();
+                showNotification('Carrito vaciado');
+                
+                // Cerrar el carrito después de vaciarlo
+                setTimeout(closeCart, 800);
+            }
         }
 
-        // Configurar event listeners
-        function setupEventListeners() {
-            // Abrir/cerrar carrito
-            if (cartIcon) {
-                cartIcon.addEventListener('click', () => {
-                    cartOverlay.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            }
-
-            if (closeCart) {
-                closeCart.addEventListener('click', () => {
-                    cartOverlay.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                });
-            }
-
-            // Cerrar carrito al hacer clic fuera de él
-            if (cartOverlay) {
-                cartOverlay.addEventListener('click', (e) => {
-                    if (e.target === cartOverlay) {
-                        cartOverlay.classList.remove('active');
-                        document.body.style.overflow = 'auto';
-                    }
-                });
-            }
-
-            // Vaciar carrito
-            if (clearCartBtn) {
-                clearCartBtn.addEventListener('click', () => {
-                    if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
-                        cart = [];
-                        updateCart();
-                        showNotification('Carrito vaciado');
-                    }
-                });
-            }
-
-            // Finalizar compra
-            if (checkoutBtn) {
-                checkoutBtn.addEventListener('click', () => {
-                    if (cart.length === 0) {
-                        alert('Tu carrito está vacío');
-                        return;
-                    }
-
-                    // Aquí iría la lógica para procesar el pago
-                    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                    const message = `¡Hola! Quiero realizar una compra por un total de $${total.toFixed(2)}. Mis productos son:\n\n${
-                        cart.map(item => `- ${item.name} (${item.quantity} x $${item.price.toFixed(2)})`).join('\n')
-                    }`;
-                    
-                    // Codificar el mensaje para WhatsApp
-                    const encodedMessage = encodeURIComponent(message);
-                    window.open(`https://wa.me/573217214397?text=${encodedMessage}`, '_blank');
-                });
-            }
-
-            // Menú móvil
-            if (mobileMenuBtn && navMenu) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    navMenu.classList.toggle('active');
-                    mobileMenuBtn.classList.toggle('active');
-                });
-            }
-
-            // Cerrar menú al hacer clic en un enlace
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    mobileMenuBtn.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                });
-            });
-
-            // Formulario de contacto
-            if (contactForm) {
-                contactForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    
-                    const name = document.getElementById('name').value;
-                    const email = document.getElementById('email').value;
-                    const subject = document.getElementById('subject').value;
-                    const message = document.getElementById('message').value;
-
-                    // Aquí iría la lógica para enviar el formulario
-                    const whatsappMessage = `¡Hola! Mi nombre es ${name} y me gustaría contactarlos.\n\nAsunto: ${subject}\nMensaje: ${message}\n\nPueden contactarme a: ${email}`;
-                    const encodedMessage = encodeURIComponent(whatsappMessage);
-                    
-                    window.open(`https://wa.me/573217214397?text=${encodedMessage}`, '_blank');
-                    
-                    // Limpiar el formulario
-                    contactForm.reset();
-                    showNotification('Mensaje enviado con éxito');
-                });
-            }
-
-            // Formulario de newsletter
-            if (newsletterForm) {
-                newsletterForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const email = newsletterForm.querySelector('input[type="email"]').value;
-                    
-                    // Aquí iría la lógica para suscribir al usuario
-                    console.log('Email suscrito:', email);
-                    newsletterForm.reset();
-                    showNotification('¡Gracias por suscribirte!');
-                });
-            }
-
-            // Smooth scrolling para enlaces internos
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        const headerOffset = 80;
-                        const elementPosition = targetElement.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
         }
 
-        // Mostrar notificación
+        // Show notification
         function showNotification(message) {
+            // Verificar si ya existe una notificación visible
+            const existingNotification = document.querySelector('.notification.show');
+            if (existingNotification) {
+                // Si ya hay una notificación, actualizarla en lugar de crear una nueva
+                existingNotification.textContent = message;
+                existingNotification.style.animation = 'none';
+                void existingNotification.offsetWidth; // Trigger reflow
+                existingNotification.style.animation = null;
+                return;
+            }
+            
             const notification = document.createElement('div');
             notification.className = 'notification';
             notification.textContent = message;
             document.body.appendChild(notification);
             
-            // Estilos para la notificación
-            notification.style.position = 'fixed';
-            notification.style.bottom = '20px';
-            notification.style.right = '20px';
-            notification.style.backgroundColor = '#4CAF50';
-            notification.style.color = 'white';
-            notification.style.padding = '15px 25px';
-            notification.style.borderRadius = '5px';
-            notification.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-            notification.style.zIndex = '1000';
-            notification.style.animation = 'slideIn 0.5s ease-out';
+            // Forzar un reflow para que la animación funcione correctamente
+            void notification.offsetWidth;
             
-            // Animación de entrada
-            const keyframes = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
-            
-            const styleElement = document.createElement('style');
-            styleElement.innerHTML = keyframes;
-            document.head.appendChild(styleElement);
+            notification.classList.add('show');
             
             // Eliminar la notificación después de 3 segundos
             setTimeout(() => {
-                notification.style.animation = 'fadeOut 0.5s ease-out';
-                
-                // Animación de salida
-                const fadeOutKeyframes = `
-                    @keyframes fadeOut {
-                        from { opacity: 1; }
-                        to { opacity: 0; transform: translateY(20px); }
-                    }
-                `;
-                
-                styleElement.innerHTML += fadeOutKeyframes;
-                
-                // Eliminar el elemento después de la animación
+                notification.classList.remove('show');
+                // Esperar a que termine la animación antes de eliminar el elemento
                 setTimeout(() => {
-                    notification.remove();
-                    styleElement.remove();
-                }, 500);
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
             }, 3000);
         }
 
-        // Actualizar clase activa en la navegación al hacer scroll
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY + 100;
+        // Setup event listeners
+        function setupEventListeners() {
+            // Cart toggle
+            if (cartIcon) {
+                cartIcon.addEventListener('click', toggleCart);
+            }
+
+            if (closeCartBtn) {
+                closeCartBtn.addEventListener('click', closeCart);
+            }
+
+            if (cartOverlay) {
+                cartOverlay.addEventListener('click', closeCart);
+            }
             
-            document.querySelectorAll('section').forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                const sectionId = section.getAttribute('id');
-                
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${sectionId}`) {
-                            link.classList.add('active');
-                        }
+            // Delegación de eventos para los botones de añadir al carrito
+// Dejar solo este manejador
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('add-to-cart') || e.target.closest('.add-to-cart')) {
+        e.preventDefault();  // Añade esta línea para prevenir comportamiento por defecto
+        e.stopPropagation(); // Y esta para detener la propagación
+        addToCart(e);
+    }
+});
+
+            // Clear cart
+            if (clearCartBtn) {
+                clearCartBtn.addEventListener('click', clearCart);
+            }
+
+            // Checkout
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', () => {
+                    if (cart.length === 0) {
+                        showNotification('Tu carrito está vacío');
+                        return;
+                    }
+                    
+                    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                    let message = '¡Hola! Quiero realizar el siguiente pedido:%0A%0A';
+                    
+                    cart.forEach(item => {
+                        message += `- ${item.quantity}x ${item.name} ($${item.price.toFixed(2)} c/u)%0A`;
+                    });
+                    
+                    message += `%0ATotal: $${total.toFixed(2)}`;
+                    
+                    const phoneNumber = '1234567890'; // Reemplaza con tu número de WhatsApp
+                    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                    
+                    window.open(url, '_blank');
+                });
+            }
+
+            // Filter products
+            if (filterBtns.length > 0) {
+                filterBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        // Remove active class from all buttons
+                        filterBtns.forEach(b => b.classList.remove('active'));
+                        // Add active class to clicked button
+                        btn.classList.add('active');
+                        // Filter products
+                        filterProducts(btn.dataset.filter);
+                    });
+                });
+            }
+
+            // Mobile menu toggle
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+
+                // Close mobile menu when clicking on a link
+                if (navLinksItems.length > 0) {
+                    navLinksItems.forEach(link => {
+                        link.addEventListener('click', () => {
+                            hamburger.classList.remove('active');
+                            navLinks.classList.remove('active');
+                        });
                     });
                 }
+            }
+
+            // Sticky header on scroll
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('.header');
+                if (header) {
+                    header.classList.toggle('scrolled', window.scrollY > 50);
+                }
             });
+        }
+
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+
+        // Manejo del formulario de contacto
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
+                this.reset();
+            });
+        }
+
+        // Manejo del formulario de newsletter
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input[type="email"]').value;
+                alert(`¡Gracias por suscribirte con el correo ${email}!`);
+                this.reset();
+            });
+        }
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const submitButton = form.querySelector('button[type="submit"]');
+    const statusMessage = document.getElementById('form-status');
+    
+    try {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+        
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
         });
+        
+        if (response.ok) {
+            form.reset();
+            statusMessage.style.display = 'block';
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 5000);
+        } else {
+            throw new Error('Error al enviar el mensaje');
+        }
+    } catch (error) {
+        alert('Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.');
+        console.error('Error:', error);
+    } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Enviar Mensaje';
+    }
+});
     </script>
 </body>
 </html>
