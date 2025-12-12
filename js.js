@@ -674,10 +674,10 @@ window.addEventListener('click', (e) => {
                     `📅 Fecha de contacto:\n${new Date().toLocaleString('es-CO')}\n\n` +
                     `Este mensaje ha sido enviado desde el sitio web.`;
 
-                window.open(
-                    `https://wa.me/+573116942545?text=${encodeURIComponent(message)}`,
-                    '_blank'
-                );
+window.open(
+    `https://wa.me/573217214397?text=${encodeURIComponent(message)}`,
+    '_blank'
+);
                 
                 // Mostrar mensaje de éxito
                 const statusElement = document.getElementById('form-status');
