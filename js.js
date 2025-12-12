@@ -73,7 +73,7 @@ if (checkoutBtn) {
                 price: 30000,
                 category: 'belleza',
                 image: './img/cafe.png',
-                description: 'El secreto de un cabello oscuro radiante le tiene la caída promueve el crecimiento nutre y da brillo.'
+                description: 'El secreto de un cabello oscuro radiante le detiene la caída promueve el crecimiento nutre y da brillo.'
             },
             {
                 id: 5,
@@ -98,7 +98,7 @@ if (checkoutBtn) {
                 category: 'suplementos',
                 image: './img/tonico.png',
                 description: 'Tónico capilar con extracto de hoja de guayaba fortalece tu cabello desde la raíz hasta las puntas dile adiós a la caída y bienvenida a la fuerza.'
-            }            
+            }      
         ];
 
         // Initialize the app
@@ -500,32 +500,34 @@ if (checkoutForm) {
 
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         
-        let message = 
-            `📩 NUEVO PEDIDO - RUBY NATURALS%0A%0A` +
-            `📋 INFORMACIÓN DEL CLIENTE%0A` +
-            `----------------------------------------%0A` +
-            `👤 Nombre completo:%0A${customerData.name}%0A%0A` +
-            `📞 Teléfono:%0A${customerData.phone}%0A%0A` +
-            `📧 Correo electrónico:%0A${customerData.email}%0A%0A` +
-            `🏠 Dirección de envío:%0A${customerData.address}%0A%0A` +
-            `🛒 DETALLE DEL PEDIDO%0A` +
-            `----------------------------------------%0A`;
-        
-        cart.forEach(item => {
-            message += `• ${item.quantity}x ${item.name}%0A` +
-                      `  Precio unitario: $${item.price.toFixed(2)}%0A` +
-                      `  Subtotal: $${(item.price * item.quantity).toFixed(2)}%0A%0A`;
-        });
-        
-        message += 
-            `----------------------------------------%0A` +
-            `💰 TOTAL: $${total.toFixed(2)}%0A%0A` +
-            `📅 Fecha del pedido: ${new Date().toLocaleString('es-CO')}%0A%0A` +
-            `¡Gracias por tu compra! Pronto nos pondremos en contacto contigo para confirmar tu pedido.`;
+let message = 
+    `📩 NUEVO PEDIDO - RUBY NATURALS\n\n` +
+    `📋 INFORMACIÓN DEL CLIENTE\n` +
+    `----------------------------------------\n` +
+    `👤 Nombre completo:\n${customerData.name}\n\n` +
+    `📞 Teléfono:\n${customerData.phone}\n\n` +
+    `📧 Correo electrónico:\n${customerData.email}\n\n` +
+    `🏠 Dirección de envío:\n${customerData.address}\n\n` + // <-- Aquí está la dirección
+    `🛒 DETALLE DEL PEDIDO\n` +
+    `----------------------------------------\n`;
 
-        const phoneNumber = '573116942545';
-        const url = `https://wa.me/${phoneNumber}?text=${message}`;
-        
+cart.forEach(item => {
+    message += `• ${item.quantity}x ${item.name}\n` +
+              `  Precio unitario: $${item.price.toFixed(2)}\n` +
+              `  Subtotal: $${(item.price * item.quantity).toFixed(2)}\n\n`;
+});
+
+message += 
+    `----------------------------------------\n` +
+    `💰 TOTAL: $${total.toFixed(2)}\n\n` +
+    `📅 Fecha del pedido: ${new Date().toLocaleString('es-CO')}\n\n` +
+    `¡Gracias por tu compra! Pronto nos pondremos en contacto contigo para confirmar tu pedido.`;
+
+const phoneNumber = '573116942545';
+
+// *** La clave: Codificar el mensaje completo al final ***
+const encodedMessage = encodeURIComponent(message);
+const url = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
         window.open(url, '_blank');
         document.getElementById('checkoutModal').style.display = 'none';
         this.reset();
@@ -655,43 +657,8 @@ window.addEventListener('click', (e) => {
         document.addEventListener('DOMContentLoaded', init);
 
         // Manejo del formulario de contacto
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const formData = new FormData(this);
-                const data = Object.fromEntries(formData.entries());
-                
-                const message =
-                    `📩 NUEVO MENSAJE DE CONTACTO - RUBY NATURALS\n\n` +
-                    `📋 INFORMACIÓN DEL CONTACTO\n` +
-                    `----------------------------------------\n` +
-                    `👤 Nombre completo:\n${data.name}\n\n` +
-                    `📧 Correo electrónico:\n${data.email}\n\n` +
-                    `📝 Asunto:\n${data.subject}\n\n` +
-                    `💬 Mensaje:\n${data.message}\n\n` +
-                    `📅 Fecha de contacto:\n${new Date().toLocaleString('es-CO')}\n\n` +
-                    `Este mensaje ha sido enviado desde el sitio web.`;
 
-window.open(
-    `https://wa.me/573217214397?text=${encodeURIComponent(message)}`,
-    '_blank'
-);
-                
-                // Mostrar mensaje de éxito
-                const statusElement = document.getElementById('form-status');
-                if (statusElement) {
-                    statusElement.style.display = 'block';
-                    setTimeout(() => {
-                        statusElement.style.display = 'none';
-                    }, 5000);
-                }
-                
-                // Limpiar el formulario
-                this.reset();
-            });
-        }
+
 
         // Manejo del formulario de newsletter
         const newsletterForm = document.querySelector('.newsletter-form');
@@ -713,13 +680,29 @@ window.open(
         submitButton.disabled = true;
         submitButton.textContent = 'Enviando...';
         
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
+                    // Build FormData and ensure the subject is sent as `_subject` (Formspree uses this)
+                    const formData = new FormData(form);
+                    // Try to read the subject from common field names/ids
+                    let subjectValue = '';
+                    const subjectField = form.querySelector('input[name="subject"], textarea[name="subject"], input[id="subject"], textarea[id="subject"], input[name="asunto"], textarea[name="asunto"]');
+                    if (subjectField) subjectValue = subjectField.value.trim();
+                    // If there's a specific customerSubject id used elsewhere, check it
+                    if (!subjectValue) {
+                        const cs = document.getElementById('customerSubject');
+                        if (cs) subjectValue = cs.value.trim();
+                    }
+                    // If we found a subject, set it as `_subject` so Formspree uses it as the email subject
+                    if (subjectValue) {
+                        formData.set('_subject', subjectValue);
+                    }
+
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
         
         if (response.ok) {
             form.reset();
